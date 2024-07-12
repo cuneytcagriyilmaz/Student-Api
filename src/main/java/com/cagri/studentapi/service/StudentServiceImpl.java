@@ -34,8 +34,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public StudentResponse saveStudent(StudentRequest studentRequest) {
-        // Öğrenci numarasının benzersiz olduğunu kontrol et
-        if (studentRepository.existsByStudentNumber(studentRequest.getStudentNumber())) {
+         if (studentRepository.existsByStudentNumber(studentRequest.getStudentNumber())) {
             throw new StudentNumberDuplicateException(studentRequest.getStudentNumber());
         }
 

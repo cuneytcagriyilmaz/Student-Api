@@ -22,20 +22,7 @@ public class GradeServiceImpl implements GradeService {
     private final GradeConverter gradeConverter;
 
 
-//    @Override
-//    public GradeResponse addGrade(GradeRequest gradeRequest) {
-//        Student student = studentRepository.findStudentByStudentNumber(gradeRequest.getStudentNumber());
-//        if (student == null) {
-//            throw new RuntimeException("Student not found with studentNumber: " + gradeRequest.getStudentNumber());
-//        }
-//        Grade grade = new Grade();
-//        grade.setCode(gradeRequest.getCode());
-//        grade.setValue(gradeRequest.getValue());
-//        grade.setStudent(student);
-//
-//        Grade savedGrade = gradeRepository.save(grade);
-//        return gradeConverter.toResponse(savedGrade);
-//    }
+
 
     @Override
     public GradeResponse addGrade(GradeRequest gradeRequest) {
@@ -46,14 +33,12 @@ public class GradeServiceImpl implements GradeService {
 
         Grade existingGrade = gradeRepository.findByStudentAndCode(student, gradeRequest.getCode());
         if (existingGrade != null) {
-            // Mevcut notu güncelle
-            double newValue = (existingGrade.getValue() + gradeRequest.getValue()) / 2.0;
+             double newValue = (existingGrade.getValue() + gradeRequest.getValue()) / 2.0;
             existingGrade.setValue((int) newValue);
             Grade savedGrade = gradeRepository.save(existingGrade);
             return gradeConverter.toResponse(savedGrade);
         } else {
-            // Yeni not ekle
-            Grade grade = new Grade();
+             Grade grade = new Grade();
             grade.setCode(gradeRequest.getCode());
             grade.setValue(gradeRequest.getValue());
             grade.setStudent(student);
