@@ -3,7 +3,10 @@ package com.cagri.studentapi.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -27,7 +30,8 @@ public class Grade {
 
     @Column(name = "value")
     @NotNull(message = "Value cannot be null")
-
+    @Min(value = 0, message = "Value must be at least 0")
+    @Max(value = 100, message = "Value must be at most 100")
     private int value;
 
 

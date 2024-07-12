@@ -1,9 +1,7 @@
 package com.cagri.studentapi.dto;
 
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
@@ -15,6 +13,8 @@ public class GradeRequest {
     @NotNull(message = "Value cannot be null")
     private int value;
 
+    @Min(value = 0, message = "Value must be at least 0")
+    @Max(value = 100, message = "Value must be at most 100")
     private String studentNumber;
 
 }
